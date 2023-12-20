@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           try {
               // Send the message to your server
               //START COMMENT IF TESTING STYLES
-              const response = await fetch('http://localhost:3001/get-response', {
+              const response = await fetch('https://finneyspickerbackend.onrender.com/get-response', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json'
