@@ -1,0 +1,80 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #333;
+  color: white;
+  height: 100vh;
+}
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.chat-header {
+  padding: 20px;
+  background-color: #222;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.chat-messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  border: 1px solid #444;
+  margin: 10px;
+}  
+.chat-footer {
+  display: flex;
+  padding: 10px;
+}
+.input-message {
+  flex-grow: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+}
+.send-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+.send-button:hover {
+  background-color: #0056b3;
+}
+.bot-message, .user-message {
+  display: block; /* This ensures each message appears on a new line */
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  word-wrap: break-word;
+  width: fit-content; /* This will make the container fit the content's width */
+  max-width: 80%;
+  margin-left: auto; /* Aligns the user message to the right */
+  margin-right: auto; /* Aligns the bot message to the left */
+}
+
+.bot-message {
+  background-color: #555;
+  text-align: left;
+  margin-left: 10px; /* Add some space on the right side of bot messages */
+}
+
+.user-message {
+  background-color: #007bff;
+  text-align: left;
+  margin-right: 20px; /* Add some space on the left side of user messages */
+  color: white;
+}
+
+
+.loading-indicator {
+  color: #007bff;
+  text-align: center;
+  padding: 10px;
+}  
