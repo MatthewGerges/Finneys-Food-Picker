@@ -1,2 +1,4 @@
 .env
 node_modules
+LinkChanger/node_modules
+LinkChanger/service-account-file.json
