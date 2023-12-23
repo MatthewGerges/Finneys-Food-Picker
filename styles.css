@@ -4,77 +4,160 @@ body, html {
   font-family: 'Arial', sans-serif;
   background-color: #333;
   color: white;
-  height: 100vh;
+  height: 88vh;
 }
+
+/* Chat container */
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1; /* Allow chat container to fill the available space */
 }
+
+/* Header */
 .chat-header {
-  padding: 20px;
   background-color: #222;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 20px;
   font-size: 1.5em;
   font-weight: bold;
+  text-align: left;
+  flex-shrink: 0; /* Header does not shrink */
+  position: fixed; /* Fixed position */
+  top: 0; /* Stick to the top */
+  width: 100%; /* Header width spans the full viewport width */
+  z-index: 2; /* Ensures the header stays on top of other elements */
 }
+/* 
+.chat-header {
+  font-family: 'Pacifico', cursive; /* Now using Pacifico font 
+}
+ */
+
+/* Messages area */
 .chat-messages {
   flex-grow: 1;
   padding: 20px;
-  overflow-y: auto;
-  border: 1px solid #444;
-  margin: 10px;
-}  
+  padding-top: 30px; /* Increased top padding to space out the welcome message */
+  overflow-y: auto; /* Ensure this is set so the area can scroll */
+  margin-top: 70px; /* Adjust the margin-top to account for the fixed header */
+  margin-bottom: 70px; /* Adjust the margin-bottom to account for the fixed footer */
+}
+
+/* Footer */
 .chat-footer {
   display: flex;
   padding: 10px;
+  flex-shrink: 0;
+  position: fixed; /* Fixed position */
+  bottom: 0; /* Stick to the bottom */
+  width: 100%; /* Footer width spans the full viewport width */
+  z-index: 2; /* Ensures the footer stays on top of other elements */
 }
-.input-message {
-  flex-grow: 1;
+
+/* Input and Send Button */
+.input-message, .send-button {
   padding: 10px;
   margin-right: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
 }
-.send-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
+
+.input-message {
+  flex-grow: 1;
+  padding-left: 20px; /* More space inside the input on the left */
+  width: calc(100% - 40px - 60px); /* Adjust width */
+}
+
+
+
+.send-button, .user-message {
+  background-color: #AA182C; /* New color for messages and send button */
   color: white;
   cursor: pointer;
 }
+
+.send-button {
+  padding: 5px 30px; /* Larger button */
+  font-size: 1.1em; /* Larger text */
+  /* ... other styles ... */
+}
+
 .send-button:hover {
   background-color: #0056b3;
 }
+
+/* Messages */
 .bot-message, .user-message {
-  display: block; /* This ensures each message appears on a new line */
-  margin-bottom: 10px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 12px;
   word-wrap: break-word;
   width: fit-content; /* This will make the container fit the content's width */
-  max-width: 80%;
-  margin-left: auto; /* Aligns the user message to the right */
-  margin-right: auto; /* Aligns the bot message to the left */
+  max-width: 80%; /* Set max-width to 80% */
+  margin-bottom: 10px;
+  display: block; /* Ensures each message appears on a new line */
 }
 
 .bot-message {
   background-color: #555;
   text-align: left;
-  margin-left: 10px; /* Add some space on the right side of bot messages */
+  margin-left: 10px;
 }
 
 .user-message {
-  background-color: #007bff;
   text-align: left;
-  margin-right: 20px; /* Add some space on the left side of user messages */
-  color: white;
+  margin-left: auto;
+  margin-right: 20px;
 }
 
-
+/* Loading indicator */
 .loading-indicator {
   color: #007bff;
   text-align: center;
   padding: 10px;
-}  
+}
+
+.chat-footer .input-message {
+  margin-right: 10px; /* Adjust spacing between input and send button */
+}
+
+.chat-footer .send-button {
+  margin-right: 20px; /* Adjust if necessary to avoid overlapping the scrollbar */
+}
+
+.chat-header img {
+  margin-right: 15px; /* Increased right margin for spacing between logo and title */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .chat-container {
+    height: 100vh; /* Make sure the chat container fits the viewport height */
+  }
+
+  .chat-header, .chat-footer {
+    padding: 10px; /* Reduce padding on smaller screens */
+  }
+
+  .chat-header {
+    flex-direction: column; /* Stack logo and title vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .chat-header img {
+    margin-bottom: 10px; /* Add space between logo and title */
+  }
+
+  .chat-messages {
+    max-height: 70vh; /* Adjust the message area to be a percentage of the viewport height */
+  }
+
+  .chat-footer {
+    max-height: 10vh;
+  }
+
+  .input-message {
+    width: calc(100% - 20px); /* Adjust width for smaller screens */
+  }
+}
