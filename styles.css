@@ -68,6 +68,7 @@ body, html {
   flex-grow: 1;
   padding-left: 20px; /* More space inside the input on the left */
   width: calc(100% - 40px - 60px); /* Adjust width */
+  font-size: 16px; /* Set font size to at least 16px to prevent auto-zoom on mobile */
 }
 
 
@@ -80,7 +81,7 @@ body, html {
 
 .send-button {
   padding: 5px 30px; /* Larger button */
-  font-size: 1.1em; /* Larger text */
+  font-size: 1.1em; 
   /* ... other styles ... */
 }
 
@@ -141,12 +142,15 @@ body, html {
   }
 
   .chat-header {
-    flex-direction: column; /* Stack logo and title vertically */
+    flex-direction: row; /* Stack logo and title vertically */
     align-items: flex-start; /* Align items to the start */
+    align-items: center; /* This aligns items vertically in the center */
   }
+  
 
   .chat-header img {
-    margin-bottom: 10px; /* Add space between logo and title */
+    margin-bottom: 0; /* Remove bottom margin from logo */
+    margin-right: 10px; /* Ensure some space between logo and title */
   }
 
   .chat-messages {
