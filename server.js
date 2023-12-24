@@ -36,6 +36,30 @@ app.post('/get-response', async (req, res) => {
         runStatus = await openai.beta.threads.runs.retrieve(thread.id, run.id);
       }
 
+
+  //     //CHECKING FOR TABLE RESERVATION:
+  //         // If the model output includes a function call
+  //   if (runStatus.status === 'requires_action') {
+  //     // You might receive an array of actions, iterate over it
+  //     for (const action of runStatus.required_action.submit_tool_outputs.tool_calls) {
+  //         const functionName = action.function.name;
+  //         const arguments = JSON.parse(action.function.arguments);
+          
+  //         // Check if the function name matches 'table_reservation'
+  //         if (functionName === 'table_reservation') {
+  //             handleTableReservation(arguments);
+  //             // Respond back to the model that the action has been handled
+  //             await openai.beta.threads.runs.submit_tool_outputs(thread.id, run.id, {
+  //                 tool_outputs: [{
+  //                     tool_call_id: action.id,
+  //                     output: { success: true } // You can include more details if needed
+  //                 }]
+  //             });
+  //         }
+  //     }
+  // }
+
+
       // Get the last assistant message from the messages array
       const messages = await openai.beta.threads.messages.list(thread.id);
 
@@ -50,32 +74,91 @@ app.post('/get-response', async (req, res) => {
       assistantMessage = ""
       if (lastMessageForRun) {
         assistantMessage = lastMessageForRun.content[0].text.value
-        // console.log(`${assistantMessage} \n`);
+        console.log(`${assistantMessage} \n`);
       }
     
       res.json({ message: assistantMessage });
-
-    // try {
-    //     const response = await openai.createMessage({
-    //         assistant_id: assistantId,
-    //         model: "davinci", // Replace with the specific model you're using with the assistant, if necessary
-    //         messages: [{
-    //             role: "user",
-    //             content: userMessage
-    //         }]
-    //     });
-
-    //     // Assuming the assistant's response is in the last message of the array
-    //     const lastMessage = response.data.data.messages.slice(-1)[0];
-
-    //     // Send the assistant's response to the frontend
-    //     res.json({ message: lastMessage.content });
-
-    // } catch (error) {
-    //     console.error('OpenAI error:', error);
-    //     res.status(500).send('Error processing your request');
-    // }
 });
 
 const PORT = 3001;
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+
+
+// const express = require('express');
+// const { OpenAI } = require('openai');
+// const cors = require('cors');
+// require('dotenv').config();
+
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
+
+// const openai = new OpenAI(process.env.OPENAI_API_KEY);
+
+// // Dummy function for demonstration purposes
+// function makeReservation(details) {
+//   // Here you can integrate with an actual reservation system or database
+//   console.log(`Reservation request: ${JSON.stringify(details)}`);
+//   return { confirmation: "Reservation made successfully!" };
+// }
+// app.post('/get-response', async (req, res) => {
+//   const userMessage = req.body.message;
+
+//   // Define the function call details in the tools list
+//   const tools = [{
+//     "type": "function",
+//     "function": {
+//         "name": "make_reservation",
+//         "description": "Make a table reservation",
+//         // ...additional details here...
+//     }
+//   }];
+
+//   // Create a conversation with the initial user message
+//   const initialResponse = await openai.chat.completions.create({
+//     model: "gpt-3.5-turbo",
+//     messages: [{
+//         role: "user",
+//         content: userMessage
+//     }],
+//     tools: tools,
+//   });
+
+//   // Check if the model's response includes a function call
+//   const toolCalls = initialResponse.choices[0].message.tool_calls;
+//   if (toolCalls && toolCalls.length > 0) {
+//       // Prepare the tool response messages
+//       const toolResponseMessages = toolCalls.map(toolCall => {
+//           // Call your function based on the tool call details
+//           // This should be replaced with your actual function logic
+//           const functionOutput = makeReservation(/* ...arguments... */);
+//           return {
+//               role: "system",
+//               tool_call_id: toolCall.id, // Match the id of the tool call
+//               content: JSON.stringify(functionOutput)
+//           };
+//       });
+
+//       // Add the tool response messages to the conversation
+//       const followUpResponse = await openai.chat.completions.create({
+//           model: "gpt-3.5-turbo",
+//           messages: initialResponse.choices[0].message.concat(toolResponseMessages),
+//           tools: tools,
+//       });
+
+//       // Send the final response back to the client
+//       res.json({
+//           message: followUpResponse.choices[0].message.content
+//       });
+//   } else {
+//       // If no function call was required, send the initial response
+//       res.json({
+//           message: initialResponse.choices[0].message.content
+//       });
+//   }
+// });
+
+
+
+// const PORT = 3001;
+// app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

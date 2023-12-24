@@ -20,8 +20,8 @@ body, html {
   display: flex;
   align-items: center;
   padding: 20px;
-  font-size: 1.5em;
-  font-weight: bold;
+  font-size: 2em;
+  /* font-weight: bold; */
   text-align: left;
   flex-shrink: 0; /* Header does not shrink */
   position: fixed; /* Fixed position */
@@ -29,11 +29,11 @@ body, html {
   width: 100%; /* Header width spans the full viewport width */
   z-index: 2; /* Ensures the header stays on top of other elements */
 }
-/* 
+
 .chat-header {
-  font-family: 'Pacifico', cursive; /* Now using Pacifico font 
+  font-family: 'Pacifico', cursive; /* Now using Pacifico font */
 }
- */
+
 
 /* Messages area */
 .chat-messages {
@@ -154,7 +154,7 @@ body, html {
   }
 
   .chat-messages {
-    max-height: 70vh; /* Adjust the message area to be a percentage of the viewport height */
+    max-height: 82vh; /* Adjust the message area to be a percentage of the viewport height */
   }
 
   .chat-footer {

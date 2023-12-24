@@ -23,19 +23,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
           try {
               // Send the message to your server
               //START COMMENT IF TESTING STYLES
-            //   const response = await fetch('https://finneyspickerbackend.onrender.com/get-response', {
-            //       method: 'POST',
-            //       headers: {
-            //           'Content-Type': 'application/json'
-            //       },
-            //       body: JSON.stringify({ message: userText })
-            //   });
+              const response = await fetch('https://finneyspickerbackend.onrender.com/get-response', {
+                // const response = await fetch('http://localhost:3001/get-response', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ message: userText })
+              });
 
-            //   if (!response.ok) {
-            //       throw new Error(`HTTP error! status: ${response.status}`);
-            //   }
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
 
-            //   const data = await response.json();
+              const data = await response.json();
               //END COMMENT
 
               // Remove loading indicator
@@ -43,8 +44,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
               // Display bot's response
               const botResponseDiv = document.createElement('div');
-              botResponseDiv.textContent = "Hello!";
-            //   botResponseDiv.textContent = data.message;
+              // botResponseDiv.textContent = "Hello!";
+              botResponseDiv.textContent = data.message;
               botResponseDiv.className = 'bot-message';
               chatMessages.appendChild(botResponseDiv);
           } catch (error) {
