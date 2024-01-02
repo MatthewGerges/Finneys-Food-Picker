@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const inputMessage = document.querySelector('.input-message');
   const chatMessages = document.querySelector('.chat-messages');
 
+   // Retrieve the thread ID from session storage or set it to null
+   let threadId = sessionStorage.getItem('threadId') || null;
+
   const sendMessage = async () => {
     const userText = inputMessage.value.trim();
       if (userText) {
@@ -29,7 +32,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                   headers: {
                       'Content-Type': 'application/json'
                   },
-                  body: JSON.stringify({ message: userText })
+                  body: JSON.stringify({ message: userText, threadId: threadId })
               });
 
               if (!response.ok) {
@@ -38,6 +41,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
               const data = await response.json();
               //END COMMENT
+
+              // Check if a new thread ID was returned from the server and store it
+              if (data.threadId && !threadId) {
+                    threadId = data.threadId;
+                    sessionStorage.setItem('threadId', threadId);
+                }
 
               // Remove loading indicator
               chatMessages.removeChild(loadingDiv)

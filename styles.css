@@ -129,6 +129,9 @@ body, html {
 
 .chat-header img {
   margin-right: 15px; /* Increased right margin for spacing between logo and title */
+  /* width: 50px; */
+  width: 50px; /* Adjust the logo size on smaller screens */
+  height: auto; /* Maintain aspect ratio */
 }
 
 /* Responsive adjustments */
@@ -161,7 +164,54 @@ body, html {
     max-height: 10vh;
   }
 
-  .input-message {
-    width: calc(100% - 20px); /* Adjust width for smaller screens */
+  /* .input-message {
+    width: calc(100% - 20px); /* Adjust width for smaller screens
+  } */
+}
+
+/* Header */
+.chat-header {
+  /* ... other styles ... */
+  white-space: nowrap; /* Prevent the title from wrapping */
+}
+
+/* Responsive adjustments */
+@media (max-width: 300px) {
+  .chat-header {
+    font-size: 1.35em; /* Smaller font size to fit on one line */
+    padding: 10px; /* Adjust padding as necessary */
+    /* justify-content: center; Center the items for better spacing */
+  }
+  
+  .chat-header img {
+    width: 38px; /* Adjust the logo size on smaller screens */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .chat-footer .input-message {
+    font-size: 0.8em; /* Further reduce the font size on smaller screens */
+  }
+
+  .chat-footer .send-button {
+    padding: 10px; /* Reduce padding on smaller screens */
+    font-size: 0.85em;
+  }
+
+  .bot-message{
+    margin-left: 1px; /* Reduce left margin for message alignment */
+    margin-right: 1px; /* Reduce right margin for message alignment */
+    font-size: 0.85em;
+    /* max-width: 75%; */
+  }
+
+  .user-message {
+    text-align: left;
+    margin-left: auto;
+    margin-right: 1px;
+    font-size: 0.85em;
+  }
+
+  .chat-messages {
+    margin-top: 55px; /* Adjust the top margin to decrease space below the header */
   }
 }
