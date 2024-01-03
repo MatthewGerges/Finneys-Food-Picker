@@ -21,7 +21,11 @@ function getCurrentWeather(location) {
 function get_table_reservations(bookingTime, numGuests) {
   if (bookingTime.toLowerCase().includes("4:30")) {
     return JSON.stringify({ availability: "Not available"});
-  } else {
+  }
+  else if (!bookingTime) {
+    return JSON.stringify({ availability: "Please include a booking time"});
+  }
+  else {
     return JSON.stringify({ availability: "Available", forGuests: numGuests});
 }
 }
@@ -30,7 +34,7 @@ function get_table_reservations(bookingTime, numGuests) {
 async function runConversation() {
   // Step 1: send the conversation and available functions to the model
   const messages = [
-    { role: "user", content: "I want a table reservation for 3 people at 5:30PM." },
+    { role: "user", content: "I want a table reservation for 3 people." },
   ];
   const tools = [
     {
@@ -94,6 +98,7 @@ async function runConversation() {
       const functionName = toolCall.function.name;
       const functionToCall = availableFunctions[functionName];
       const functionArgs = JSON.parse(toolCall.function.arguments);
+      console.log('Arguments:', toolCall.function.arguments, 'name:', functionName); // Add this line to debug
       const functionResponse = functionToCall(
         functionArgs.bookingTime,
         functionArgs.numGuests

@@ -103,13 +103,13 @@ body, html {
 .bot-message {
   background-color: #555;
   text-align: left;
-  margin-left: 10px;
+  margin-left: 1px;
 }
 
 .user-message {
   text-align: left;
   margin-left: auto;
-  margin-right: 20px;
+  margin-right: 1px;
 }
 
 /* Loading indicator */
@@ -198,15 +198,13 @@ body, html {
   }
 
   .bot-message{
-    margin-left: 1px; /* Reduce left margin for message alignment */
-    margin-right: 1px; /* Reduce right margin for message alignment */
+    margin-left: 1px; /* Reduce right margin for message alignment */
     font-size: 0.85em;
     /* max-width: 75%; */
   }
 
   .user-message {
     text-align: left;
-    margin-left: auto;
     margin-right: 1px;
     font-size: 0.85em;
   }
