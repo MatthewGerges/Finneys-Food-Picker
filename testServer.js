@@ -34,7 +34,7 @@ function get_table_reservations(bookingTime, numGuests) {
 async function runConversation() {
   // Step 1: send the conversation and available functions to the model
   const messages = [
-    { role: "user", content: "I want a table reservation for 3 people." },
+    { role: "user", content: "I want a table reservation for 3 people at 4:30 PM." },
   ];
   const tools = [
     {
@@ -77,7 +77,7 @@ async function runConversation() {
 
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo-1106",
+    model: "gpt-4-1106-preview",
     messages: messages,
     tools: tools,
     tool_choice: "auto", // auto is default, but we'll be explicit
@@ -111,7 +111,7 @@ async function runConversation() {
       }); // extend conversation with function response
     }
     const secondResponse = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-1106",
+      model: "gpt-4-1106-preview",
       messages: messages,
     }); // get a new response from the model where it can see the function response
     return secondResponse.choices;
